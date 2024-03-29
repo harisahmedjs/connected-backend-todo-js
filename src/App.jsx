@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import 'remixicon/fonts/remixicon.css'
 
 const App = () => {
   const [title, setTitle] = useState("");
@@ -62,25 +63,35 @@ const App = () => {
 
   return (
     <>
-      <div>
+      <h2>Todos</h2>
+      <div className="input_div1">
         <form onSubmit={handleSubmit}>
           <input
             type="text"
             value={title}
+            className="in"
             onChange={(e) => setTitle(e.target.value)}
+            placeholder="Enter Todo..."
           />
-          <button type="submit">Add todo</button>
+          <button type="submit" className="button_in">Add todo</button>
         </form>
       </div>
 
-      <div>
-        <h2>Todos</h2>
+      <div className="input_div">
+       
         <ol>
-          {todos.map(todo => (
-            <li key={todo._id}>{todo.Title}
-            <button  onClick={ ()=>edit(todo._id)}>edit</button>
-            <button onClick={ ()=>del(todo._id)}>delete</button></li>
-          ))}
+        {todos.length === 0 ? (
+  <p>No todos found...</p>
+) : (
+  todos.map(todo => (
+    <li key={todo._id}>
+      {todo.Title}
+      <div>
+      <button onClick={() => edit(todo._id)} className="new_button"><i class="ri-edit-circle-line"></i></button>
+      <button onClick={() => del(todo._id)} className="new_button"><i class="ri-delete-bin-fill"></i></button></div>
+    </li>
+  ))
+)}
         </ol>
       </div>
     </>
